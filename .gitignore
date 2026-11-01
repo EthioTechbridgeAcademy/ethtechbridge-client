@@ -1,3 +1,18 @@
+# Dependencies
 node_modules/
+
+# Production build output
+dist/
+
+# Local environment variables
 .env
-.enve.example
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS and temp files
+.DS_Store
+Thumbs.db

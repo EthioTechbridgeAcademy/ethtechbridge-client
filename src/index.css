@@ -15,7 +15,11 @@
   --color-accent-hover: #059669;
 
   --font-serif: 'Merriweather', Georgia, serif;
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.font-academic {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 :root {
@@ -25,7 +29,7 @@
   --color-text: #111827;
   --color-accent: #10B981;
 
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #111827;
   background-color: #F8FAFC;
   font-synthesis: none;
@@ -44,7 +48,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #111827;
   background: #F8FAFC;
 }
@@ -77,9 +81,30 @@ body {
   animation: blinkCursor 0.9s infinite;
 }
 
-/* Consistent H1-H6 Scale with Merriweather Serif */
+/* Horizontal slow-motion marquee from right to left */
+@keyframes marqueeSlow {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marqueeSlow 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-slow:hover {
+  animation-play-state: paused;
+}
+
+/* Consistent H1-H6 Scale with Segoe UI */
 h1, .h1 {
-  font-family: 'Merriweather', Georgia, serif;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   font-size: clamp(2.25rem, 4.5vw, 3.5rem);
   line-height: 1.15;
   font-weight: 900;
@@ -88,7 +113,7 @@ h1, .h1 {
 }
 
 h2, .h2 {
-  font-family: 'Merriweather', Georgia, serif;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   font-size: clamp(1.75rem, 3.2vw, 2.5rem);
   line-height: 1.25;
   font-weight: 800;
@@ -97,7 +122,7 @@ h2, .h2 {
 }
 
 h3, .h3 {
-  font-family: 'Merriweather', Georgia, serif;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   font-size: clamp(1.35rem, 2.2vw, 1.75rem);
   line-height: 1.3;
   font-weight: 700;
@@ -106,7 +131,7 @@ h3, .h3 {
 }
 
 h4, .h4 {
-  font-family: 'Merriweather', Georgia, serif;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   font-size: clamp(1.125rem, 1.6vw, 1.35rem);
   line-height: 1.4;
   font-weight: 700;
@@ -114,7 +139,7 @@ h4, .h4 {
 }
 
 h5, .h5 {
-  font-family: 'Merriweather', Georgia, serif;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   font-size: 1.05rem;
   line-height: 1.45;
   font-weight: 700;
@@ -122,7 +147,7 @@ h5, .h5 {
 }
 
 h6, .h6 {
-  font-family: 'Merriweather', Georgia, serif;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   font-size: 0.9rem;
   line-height: 1.5;
   font-weight: 700;
@@ -143,3 +168,31 @@ button {
   background: #FEF3C7;
   color: #1E3A8A;
 }
+
+
+/* Restrained, four-frame hero motion */
+@keyframes heroPan { 0%,100% { transform: scale(1.02) translateX(0); } 50% { transform: scale(1.08) translateX(-1%); } }
+.hero-pan { animation: heroPan 24s ease-in-out infinite alternate; }
+.hero-scene { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.1rem; padding:2rem; text-align:center; color:white; opacity:0; animation: heroFrame 20s infinite; }
+.hero-scene svg { color:#F6B944; }
+.hero-scene span { max-width:18rem; font-size:clamp(1.2rem,2.5vw,1.8rem); font-weight:700; line-height:1.25; }
+.hero-scene-one { animation-delay:0s; } .hero-scene-two { animation-delay:5s; } .hero-scene-three { animation-delay:10s; } .hero-scene-four { animation-delay:15s; }
+@keyframes heroFrame { 0%, 4% { opacity:0; transform:translateY(8px); } 7%, 21% { opacity:1; transform:translateY(0); } 25%,100% { opacity:0; transform:translateY(-6px); } }
+.hero-dot { display:block; width:6px; height:6px; border-radius:99px; background:#64748b; animation: dotPulse 20s infinite; }
+.hero-dot:nth-child(2) { animation-delay:5s; } .hero-dot:nth-child(3) { animation-delay:10s; } .hero-dot:nth-child(4) { animation-delay:15s; }
+@keyframes dotPulse { 0%, 4%, 25%,100% { background:#64748b; } 7%,21% { background:#F59E0B; } }
+@media (prefers-reduced-motion: reduce) { .hero-pan, .hero-scene, .hero-dot { animation:none !important; } .hero-scene-one { opacity:1; } .hero-scene-two,.hero-scene-three,.hero-scene-four { display:none; } html { scroll-behavior:auto; } }
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  header, footer {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+}
+
